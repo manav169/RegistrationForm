@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { z } from 'zod'
+import logo from '../../assets/logo.png'
 
 // Zod validation schema with enhanced rules
 const registrationSchema = z.object({
@@ -109,6 +110,7 @@ const RegistrationPage = () => {
       <div className="max-w-2xl w-full">
         {/* Header Section */}
         <div className="text-center mb-8">
+          <img src={logo} alt="Logo" className="mx-auto mb-4" style={{ maxWidth: '200px' }} />
           <h1 className="text-4xl font-serif font-bold text-gray-900 mb-3">
             Registration Form
           </h1>
