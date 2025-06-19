@@ -2,6 +2,13 @@ import React, { useState } from 'react'
 import { z } from 'zod'
 import logo from '../../assets/logo.png'
 
+// Brand colors
+const brandColors = {
+  blue: 'rgb(67, 67, 132)',
+  red: '#E31C25',
+  gray: '#909090'
+}
+
 // Zod validation schema with enhanced rules
 const registrationSchema = z.object({
   firstName: z.string()
@@ -106,226 +113,311 @@ const RegistrationPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-green-300 to-blue-400 rounded-full opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-indigo-300 to-purple-400 rounded-full opacity-10 animate-spin" style={{ animationDuration: '20s' }}></div>
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Left Side - Brand Gradient with Content */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #000, #e3e3e3 59%, #3a3a3a)'
+      }}>
+        {/* Background decorative elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-32 h-32 rounded-full blur-xl" style={{
+            backgroundColor: `rgba(67, 67, 132, 0.2)`
+          }}></div>
+          <div className="absolute bottom-32 right-16 w-24 h-24 rounded-full blur-lg" style={{
+            backgroundColor: `${brandColors.red}33`
+          }}></div>
+          <div className="absolute top-1/2 left-10 w-16 h-16 rounded-full blur-md" style={{
+            backgroundColor: `${brandColors.gray}4D`
+          }}></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center items-start p-16 text-white">
+          {/* Logo */}
+          <div className="mb-8">
+            <img src={logo} alt="Logo" className="h-16 w-auto mb-6" />
+          </div>
+
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold mb-4 leading-tight">
+              Create Your Account
+              <br />
+              <span style={{ color: brandColors.gray }}>FOR FREE</span>
+            </h1>
+            
+          </div>
+
+          {/* Decorative illustration area */}
+          <div className="w-80 h-80 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-white/10" style={{
+            background: `linear-gradient(135deg, rgba(67, 67, 132, 0.3), ${brandColors.red}33)`
+          }}>
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 mx-auto" style={{
+                backgroundColor: 'rgba(67, 67, 132, 0.4)'
+              }}>
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-sm" style={{ color: brandColors.gray }}>Welcome to our platform</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="max-w-2xl w-full relative z-10">
-        {/* Header Section */}
-        <div className="text-center mb-8">
-          <div className="relative inline-block">
-            <img src={logo} alt="Logo" className="mx-auto mb-4 relative z-10" style={{ maxWidth: '150px' }} />
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
+      {/* Right Side - Registration Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="max-w-md w-full">
+          {/* Header */}
+          <div className="text-center mb-8">
+            {/* Logo for mobile */}
+            <div className="lg:hidden mb-6">
+              <img src={logo} alt="Logo" className="h-12 w-auto mx-auto" />
+            </div>
+            <h2 className="text-3xl font-bold mb-2 text-gray-800">Registration</h2>
+            <p className="text-gray-600">Fill in your details to create your account</p>
           </div>
-          <h1 className="text-5xl font-serif font-bold bg-gradient-to-r from-white via-white-200 to-pink-200 bg-clip-text text-transparent mb-3 drop-shadow-lg">
-            Registration Form
-          </h1>
-          <div className="w-32 h-2 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 mx-auto mb-4 rounded-full shadow-lg"></div>
-        </div>
 
-        {/* Form Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20 relative">
-          {/* Colorful top border */}
-          <div className="h-2 bg-gradient-to-r from-red-400 via-yellow-400 via-green-400 via-blue-400 via-indigo-400 to-purple-400"></div>
-          
-          <div className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {/* Personal Information Section */}
-              <div className="space-y-6">                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* First Name */}
-                  <div className="relative">
-                    <label htmlFor="firstName" className="block text-sm font-semibold text-gray-700 mb-2">
-                      First Name *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.firstName ? 'border-red-400' : 'border-purple-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition duration-200 bg-gradient-to-r from-purple-50 to-pink-50`}
-                        placeholder="Enter your first name"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/10 to-pink-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.firstName && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.firstName}</p>
-                    )}
-                  </div>
-
-                  {/* Last Name */}
-                  <div className="relative">
-                    <label htmlFor="lastName" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Last Name *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.lastName ? 'border-red-400' : 'border-purple-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition duration-200 bg-gradient-to-r from-purple-50 to-pink-50`}
-                        placeholder="Enter your last name"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-400/10 to-pink-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.lastName && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.lastName}</p>
-                    )}
-                  </div>
-                </div>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name Fields */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="block text-sm font-medium mb-2 text-gray-700">
+                  First Name *
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border ${
+                    errors.firstName ? `border-red-400` : 'border-gray-300'
+                  } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = brandColors.blue
+                    e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                  }}
+                  onBlur={(e) => {
+                    if (!errors.firstName) {
+                      e.target.style.borderColor = '#d1d5db'
+                      e.target.style.boxShadow = 'none'
+                    }
+                  }}
+                  placeholder="First Name"
+                />
+                {errors.firstName && (
+                  <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.firstName}</p>
+                )}
               </div>
 
-              {/* Contact Information Section */}
-              <div className="space-y-6">
-                
-                               
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Email */}
-                  <div className="md:col-span-2 relative">
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.email ? 'border-red-400' : 'border-blue-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-200 bg-gradient-to-r from-blue-50 to-cyan-50`}
-                        placeholder="Enter your email address"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/10 to-cyan-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.email && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.email}</p>
-                    )}
-                  </div>
+              <div>
+                <label htmlFor="lastName" className="block text-sm font-medium mb-2 text-gray-700">
+                  Last Name *
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border ${
+                    errors.lastName ? `border-red-400` : 'border-gray-300'
+                  } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = brandColors.blue
+                    e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                  }}
+                  onBlur={(e) => {
+                    if (!errors.lastName) {
+                      e.target.style.borderColor = '#d1d5db'
+                      e.target.style.boxShadow = 'none'
+                    }
+                  }}
+                  placeholder="Last Name"
+                />
+                {errors.lastName && (
+                  <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.lastName}</p>
+                )}
+              </div>
+            </div>
 
-                  {/* Phone */}
-                  <div className="md:col-span-2 relative">
-                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone Number *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.phone ? 'border-red-400' : 'border-blue-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition duration-200 bg-gradient-to-r from-blue-50 to-cyan-50`}
-                        placeholder="+1234567890"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-400/10 to-cyan-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.phone && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.phone}</p>
-                    )}
-                  </div>
-                </div>
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700">
+                Email Address *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className={`w-full px-4 py-3 border ${
+                  errors.email ? `border-red-400` : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                onFocus={(e) => {
+                  e.target.style.borderColor = brandColors.blue
+                  e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                }}
+                onBlur={(e) => {
+                  if (!errors.email) {
+                    e.target.style.borderColor = '#d1d5db'
+                    e.target.style.boxShadow = 'none'
+                  }
+                }}
+                placeholder="Enter your email address"
+              />
+              {errors.email && (
+                <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.email}</p>
+              )}
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium mb-2 text-gray-700">
+                Phone Number *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className={`w-full px-4 py-3 border ${
+                  errors.phone ? `border-red-400` : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                onFocus={(e) => {
+                  e.target.style.borderColor = brandColors.blue
+                  e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                }}
+                onBlur={(e) => {
+                  if (!errors.phone) {
+                    e.target.style.borderColor = '#d1d5db'
+                    e.target.style.boxShadow = 'none'
+                  }
+                }}
+                placeholder="+1234567890"
+              />
+              {errors.phone && (
+                <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.phone}</p>
+              )}
+            </div>
+
+            {/* Location Fields */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="country" className="block text-sm font-medium mb-2 text-gray-700">
+                  Country *
+                </label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border ${
+                    errors.country ? `border-red-400` : 'border-gray-300'
+                  } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = brandColors.blue
+                    e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                  }}
+                  onBlur={(e) => {
+                    if (!errors.country) {
+                      e.target.style.borderColor = '#d1d5db'
+                      e.target.style.boxShadow = 'none'
+                    }
+                  }}
+                  placeholder="Country"
+                />
+                {errors.country && (
+                  <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.country}</p>
+                )}
               </div>
 
-              {/* Location Information Section */}
-              <div className="space-y-6">             
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Country */}
-                  <div className="relative">
-                    <label htmlFor="country" className="block text-sm font-semibold text-gray-700 mb-2">
-                      Country *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="country"
-                        name="country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.country ? 'border-red-400' : 'border-green-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition duration-200 bg-gradient-to-r from-green-50 to-emerald-50`}
-                        placeholder="Enter your country"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400/10 to-emerald-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.country && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.country}</p>
-                    )}
-                  </div>
-
-                  {/* City */}
-                  <div className="relative">
-                    <label htmlFor="city" className="block text-sm font-semibold text-gray-700 mb-2">
-                      City *
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleInputChange}
-                        className={`block w-full px-4 py-3 border-2 ${
-                          errors.city ? 'border-red-400' : 'border-green-200'
-                        } rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition duration-200 bg-gradient-to-r from-green-50 to-emerald-50`}
-                        placeholder="Enter your city"
-                      />
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-400/10 to-emerald-400/10 pointer-events-none"></div>
-                    </div>
-                    {errors.city && (
-                      <p className="mt-2 text-sm text-red-500 font-medium">{errors.city}</p>
-                    )}
-                  </div>
-                </div>
+              <div>
+                <label htmlFor="city" className="block text-sm font-medium mb-2 text-gray-700">
+                  City *
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}
+                  className={`w-full px-4 py-3 border ${
+                    errors.city ? `border-red-400` : 'border-gray-300'
+                  } rounded-lg focus:outline-none focus:ring-2 transition-colors`}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = brandColors.blue
+                    e.target.style.boxShadow = `0 0 0 2px rgba(67, 67, 132, 0.2)`
+                  }}
+                  onBlur={(e) => {
+                    if (!errors.city) {
+                      e.target.style.borderColor = '#d1d5db'
+                      e.target.style.boxShadow = 'none'
+                    }
+                  }}
+                  placeholder="City"
+                />
+                {errors.city && (
+                  <p className="mt-1 text-sm" style={{ color: brandColors.red }}>{errors.city}</p>
+                )}
               </div>
+            </div>
 
-              {/* Submit Button */}
-              <div className="pt-6">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full relative overflow-hidden py-4 px-6 border-0 rounded-2xl shadow-lg text-lg font-bold text-white transform transition-all duration-200 ${
-                    isSubmitting 
-                      ? 'bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-purple-600 hover:via-pink-600 hover:to-red-600 hover:scale-105 hover:shadow-xl'
-                  } focus:outline-none focus:ring-4 focus:ring-purple-300`}
-                >
-                  <span className="relative z-10">
-                    {isSubmitting ? '🔄 Submitting...' : 'Submit'}
-                  </span>
-                  {!isSubmitting && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
-                  )}
-                </button>
+            {/* Terms and Privacy */}
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id="terms"
+                  name="terms"
+                  type="checkbox"
+                  className="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-2"
+                  style={{
+                    accentColor: brandColors.blue
+                  }}
+                />
               </div>
-            </form>
-          </div>
-        </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="terms" className="text-gray-700">
+                  I've read and agree with{' '}
+                  <a href="#" className="font-medium hover:underline" style={{ color: brandColors.blue }}>
+                    Terms of Service
+                  </a>{' '}
+                  and our{' '}
+                  <a href="#" className="font-medium hover:underline" style={{ color: brandColors.blue }}>
+                    Privacy Policy
+                  </a>
+                </label>
+              </div>
+            </div>
 
-        {/* Footer decorative elements */}
-        <div className="text-center mt-8">
-          <div className="flex justify-center space-x-2">
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-300"></div>
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-300"></div>
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-300"></div>
-            <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce delay-300"></div>
-          </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors ${
+                isSubmitting ? 'cursor-not-allowed' : 'hover:opacity-90'
+              }`}
+              style={{
+                backgroundColor: isSubmitting ? brandColors.gray : brandColors.blue
+              }}
+            >
+              {isSubmitting ? 'Creating Account...' : 'Create Account'}
+            </button>
+
+            <div className="text-center pt-4">
+              <p className="text-sm text-gray-600">
+                Already have an account?{' '}
+                <a href="#" className="font-medium hover:underline" style={{ color: brandColors.blue }}>
+                  Sign in here
+                </a>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
